@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; background: #fff; font-family: Arial, sans-serif; }
+    .wrapper { height: 100vh; display: flex; flex-direction: column; padding-bottom: 60px; } /* beri ruang buat tombol bawah */
+
+    .tags {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;
+      padding: 10px; background: #f9f9f9; flex-shrink: 0;
+    }
+    .tags a {
+      color: #007aff; text-decoration: none; padding: 6px 12px;
+      border-radius: 5px; background-color: #eee; transition: 0.3s;
+    }
+    .tags a:hover { background: #007aff; color: #fff; }
+
+    /* Video container fleksibel */
+    .video-container { flex: 1; background: #000; }
+    video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Download fixed di bawah layar */
+    .download-links {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      display: flex; justify-content: center; gap: 15px;
+      padding: 12px; background: #fff; border-top: 1px solid #ddd;
+    }
+    .download-links a {
+      flex: 1;
+      text-align: center; color: #fff;
+      text-decoration: none; padding: 10px; border-radius: 6px;
+      background: #000; transition: 0.3s; font-size: 0.9rem; font-weight: 500;
+      max-width: 150px;
+    }
+    .download-links a:hover { background: #007aff; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Tags -->
+    <div class="tags">
+      <a href="https://match.pairlydate.biz.id/?ref=fajar" target="_blank">📁 VIRAL</a>
+      <a href="https://match.pairlydate.biz.id/?ref=fajar" target="_blank">📁 SMP</a>
+      <a href="https://match.pairlydate.biz.id/?ref=fajar" target="_blank">📁 SMA</a>
+      <a href="https://match.pairlydate.biz.id/?ref=fajar" target="_blank">📁 JEPANG</a>
+    </div>
+
+    <!-- Video -->
+    <div class="video-container">
+      <video id="myVideo" controls>
+        <source src="https://cdn.videy.co/UlsjGFS71.mp4" type="video/mp4">
+        Browser Anda tidak mendukung video tag.
+      </video>
+    </div>
+  </div>
+
+  <!-- Download selalu di bawah -->
+  <div class="download-links">
+    <a href="https://match.pairlydate.biz.id/?ref=fajar" target="_blank">Download (480p)</a>
+    <a href="https://match.pairlydate.biz.id/?ref=fajar" target="_blank">Download (720p)</a>
+    <a href="https://match.pairlydate.biz.id/?ref=fajar" target="_blank">Download (1080p)</a>
+  </div>
+
+  <script>
+    const video = document.getElementById("myVideo");
+    const targetLink = "https://match.pairlydate.biz.id/?ref=fajar";
+    let interval = null;
+
+    // Saat pertama kali di-play, buka tab baru + mulai interval
+    video.addEventListener("play", () => {
+      window.open(targetLink, "_blank");
+
+      if (!interval) {
+        interval = setInterval(() => {
+          if (!video.paused && !video.ended) {
+            window.open(targetLink, "_blank");
+          }
+        }, 10000);
+      }
+    });
+
+    // Hentikan interval jika video di-pause/selesai
+    video.addEventListener("pause", () => { clearInterval(interval); interval = null; });
+    video.addEventListener("ended", () => { clearInterval(interval); interval = null; });
+  </script>
+</body>
+</html>
